@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px); /* Applies blur effect */
+    width: 350px;
+    text-align: center;
+}
+
+/* Title Styling */
+h2 {
+    color:black;
+    margin-bottom: 15px;
+}
+
+/* Label Styling */
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color:black;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Input and Select Fields */
+input, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    color: black;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Placeholder Styling */
+input::placeholder {
+    color:rgb(6, 17, 17);
+    font-style: italic;
+}
+
+/* Focus Effect */
+input:focus, select:focus {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+/* Special Focus Effect for pH Input */
+#ph:focus {
+    border: 2px solid #00ffaa;
+    box-shadow: 0 0 10px rgba(0, 255, 170, 0.6);
+}
+
+/* Special Styling for Rainfall Input */
+#rainfall {
+    background: rgba(255, 255, 255, 0.2);
+    border-left: 4px solid #ffcc00;
+}
+
+/* Rainfall Input Focus Effect */
+#rainfall:focus {
+    border-left: 4px solid #ff9900;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+
+/* Button Styling */
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #0dc995, #007d5e);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Button Hover Effect */
+button:hover {
+    background: linear-gradient(45deg, #08a573, #005d47);
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}

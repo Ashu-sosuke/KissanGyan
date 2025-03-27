@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Trade Details</title>
+    <style>
+        :root {
+            --primary-bg: #f5e6ca;
+            --text-color: #333;
+            --table-bg: #fff;
+            --table-header-bg: #4a6b57;
+            --table-header-text: #fff;
+            --border-color: #ddd;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --cell-padding: 12px;
+            --chart-margin: 20px;
+            --primary-color: #4a6b57;
+            --secondary-color: #f8b400;
+            --hover-color: #3a5a46;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        .arrow {
+            color: var(--secondary-color);
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        #box1 {
+            display: flex;
+            width: 100%;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #chart {
+            flex: 1;
+            min-width: 300px;
+            max-width: 700px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: var(--chart-margin);
+            transition: margin 0.3s ease;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            
+        }
+
+        #table-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            overflow: visible;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        #table {
+            width: 100%;
+            max-height: none;
+            overflow: visible;
+            transition: max-height 0.3s ease;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--table-bg);
+        }
+
+        .table th, .table td {
+            border: 1px solid var(--border-color);
+            padding: var(--cell-padding);
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .table th {
+            background-color: var(--table-header-bg);
+            color: var(--table-header-text);
+            
+            top: 0;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .table th:hover {
+            background-color: var(--hover-color);
+        }
+
+        .table tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .table tr:hover td {
+            background-color: rgba(74, 107, 87, 0.1);
+        }
+
+        .price-range {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .price-value {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Sorting indicators */
+        .sortable::after {
+            content: '⇅';
+            margin-left: 5px;
+            font-size: 0.8em;
+            opacity: 0.6;
+        }
+
+        .sorted-asc::after {
+            content: '↑';
+            opacity: 1;
+        }
+
+        .sorted-desc::after {
+            content: '↓';
+            opacity: 1;
+        }
+
+        /* Filter controls */
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .filter-group select, .filter-group input {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            min-width: 150px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            :root {
+                --cell-padding: 8px;
+            }
+            
+            #box1 {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            #chart, #table-container {
+                width: 100%;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --cell-padding: 6px;
+            }
+            
+            .table th, .table td {
+                font-size: 0.9rem;
+                padding: 6px 4px;
+            }
+            
+            .filters {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .filter-group select, .filter-group input {
+                width: 100%;
+            }
+        }
+
+        /* Animation for table rows */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .table tbody tr {
+            animation: fadeIn 0.3s ease forwards;
+            opacity: 0;
+        }
+
+        .table tbody tr:nth-child(1) { animation-delay: 0.1s; }
+        .table tbody tr:nth-child(2) { animation-delay: 0.2s; }
+        .table tbody tr:nth-child(3) { animation-delay: 0.3s; }
+        .table tbody tr:nth-child(4) { animation-delay: 0.4s; }
+        .table tbody tr:nth-child(5) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h2><span class="arrow">➤</span>Price of Different Crops in Different States</h2>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <label for="crop-filter">Filter by Crop:</label>
+                <select id="crop-filter">
+                    <option value="all">All Crops</option>
+                    <option value="Rice">Rice</option>
+                    <option value="Wheat">Wheat</option>
+                    <option value="Sugarcane">Sugarcane</option>
+                    <option value="Cotton">Cotton</option>
+                    <option value="Maize">Maize</option>
+                    <option value="Pulses">Pulses</option>
+                    <option value="Groundnut">Groundnut</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="state-filter">Filter by State:</label>
+                <select id="state-filter">
+                    <option value="all">All States</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="West Bengal">West Bengal</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="price-filter">Price Range:</label>
+                <select id="price-filter">
+                    <option value="all">All Prices</option>
+                    <option value="low">Below ₹2,000</option>
+                    <option value="medium">₹2,000 - ₹4,000</option>
+                    <option value="high">Above ₹4,000</option>
+                </select>
+            </div>
+        </div>
+        
+        <div id="box1"> 
+            <div id="chart">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div id="table-container">  
+                <div id="table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-sort="crop">Crop</th>
+                                <th class="sortable" data-sort="state">State</th>
+                                <th class="sortable" data-sort="price">Price (₹ per quintal)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- Table rows will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Sample data
+        const cropData = [
+            { crop: "Rice", state: "Punjab", minPrice: 2000, maxPrice: 3000 },
+            { crop: "Rice", state: "West Bengal", minPrice: 1800, maxPrice: 2500 },
+            { crop: "Rice", state: "Uttar Pradesh", minPrice: 1600, maxPrice: 2200 },
+            { crop: "Wheat", state: "Punjab", minPrice: 2000, maxPrice: 2500 },
+            { crop: "Wheat", state: "Haryana", minPrice: 2000, maxPrice: 2300 },
+            { crop: "Wheat", state: "Madhya Pradesh", minPrice: 1800, maxPrice: 2200 },
+            { crop: "Sugarcane", state: "Uttar Pradesh", minPrice: 300, maxPrice: 400 },
+            { crop: "Sugarcane", state: "Maharashtra", minPrice: 320, maxPrice: 420 },
+            { crop: "Sugarcane", state: "Tamil Nadu", minPrice: 300, maxPrice: 380 },
+            { crop: "Cotton", state: "Gujarat", minPrice: 5000, maxPrice: 6500 },
+            { crop: "Cotton", state: "Maharashtra", minPrice: 5500, maxPrice: 6500 },
+            { crop: "Cotton", state: "Punjab", minPrice: 5000, maxPrice: 6000 },
+            { crop: "Maize", state: "Karnataka", minPrice: 1800, maxPrice: 2200 },
+            { crop: "Maize", state: "Andhra Pradesh", minPrice: 1600, maxPrice: 2000 },
+            { crop: "Maize", state: "Madhya Pradesh", minPrice: 1700, maxPrice: 2100 },
+            { crop: "Pulses", state: "Maharashtra", minPrice: 6000, maxPrice: 8000, note: "(Arhar)" },
+            { crop: "Pulses", state: "Uttar Pradesh", minPrice: 5500, maxPrice: 7500, note: "(Moong)" },
+            { crop: "Pulses", state: "Rajasthan", minPrice: 5500, maxPrice: 7000, note: "(Moong)" },
+            { crop: "Groundnut", state: "Gujarat", minPrice: 4000, maxPrice: 5000 },
+            { crop: "Groundnut", state: "Andhra Pradesh", minPrice: 3800, maxPrice: 4500 },
+            { crop: "Groundnut", state: "Tamil Nadu", minPrice: 3500, maxPrice: 4200 }
+        ];
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderTable(cropData);
+            setupChart();
+            setupFilters();
+            setupSorting();
+        });
+
+        // Render table with data
+        function renderTable(data) {
+            const tableBody = document.getElementById('table-body');
+            tableBody.innerHTML = '';
+            
+            let currentCrop = '';
+            
+            data.forEach((item, index) => {
+                const row = document.createElement('tr');
+                
+                // Crop cell with rowspan logic
+                if (item.crop !== currentCrop) {
+                    currentCrop = item.crop;
+                    const cropCount = data.filter(d => d.crop === currentCrop).length;
+                    
+                    const cropCell = document.createElement('td');
+                    cropCell.textContent = item.crop;
+                    cropCell.rowSpan = cropCount;
+                    cropCell.style.verticalAlign = 'middle';
+                    row.appendChild(cropCell);
+                }
+                
+                // State cell
+                const stateCell = document.createElement('td');
+                stateCell.textContent = item.state;
+                row.appendChild(stateCell);
+                
+                // Price cell
+                const priceCell = document.createElement('td');
+                const priceDiv = document.createElement('div');
+                priceDiv.className = 'price-range';
+                
+                const minSpan = document.createElement('span');
+                minSpan.className = 'price-value';
+                minSpan.textContent = item.minPrice.toLocaleString('en-IN');
+                
+                const maxSpan = document.createElement('span');
+                maxSpan.className = 'price-value';
+                maxSpan.textContent = item.maxPrice.toLocaleString('en-IN');
+                
+                priceDiv.appendChild(minSpan);
+                priceDiv.appendChild(document.createTextNode(' - '));
+                priceDiv.appendChild(maxSpan);
+                
+                if (item.note) {
+                    priceDiv.appendChild(document.createTextNode(' ' + item.note));
+                }
+                
+                priceCell.appendChild(priceDiv);
+                row.appendChild(priceCell);
+                
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Setup chart
+        function setupChart() {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Rice', 'Wheat', 'Sugarcane', 'Cotton', 'Maize', 'Pulses', 'Groundnut'],
+                    datasets: [
+                        {
+                            label: 'Average Min Price (₹)',
+                            data: calculateAveragePrices('minPrice'),
+                            backgroundColor: 'rgba(74, 107, 87, 0.7)',
+                            borderColor: 'rgba(74, 107, 87, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Average Max Price (₹)',
+                            data: calculateAveragePrices('maxPrice'),
+                            backgroundColor: 'rgba(248, 180, 0, 0.7)',
+                            borderColor: 'rgba(248, 180, 0, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Average Crop Prices Across States',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ₹' + context.raw.toLocaleString('en-IN');
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return '₹' + value.toLocaleString('en-IN');
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Calculate average prices for chart
+        function calculateAveragePrices(priceType) {
+            const crops = [...new Set(cropData.map(item => item.crop))];
+            return crops.map(crop => {
+                const items = cropData.filter(item => item.crop === crop);
+                const sum = items.reduce((acc, item) => acc + item[priceType], 0);
+                return Math.round(sum / items.length);
+            });
+        }
+
+        // Setup filter functionality
+        function setupFilters() {
+            const cropFilter = document.getElementById('crop-filter');
+            const stateFilter = document.getElementById('state-filter');
+            const priceFilter = document.getElementById('price-filter');
+            
+            [cropFilter, stateFilter, priceFilter].forEach(filter => {
+                filter.addEventListener('change', applyFilters);
+            });
+        }
+
+        // Apply all filters
+        function applyFilters() {
+            const cropValue = document.getElementById('crop-filter').value;
+            const stateValue = document.getElementById('state-filter').value;
+            const priceValue = document.getElementById('price-filter').value;
+            
+            let filteredData = [...cropData];
+            
+            if (cropValue !== 'all') {
+                filteredData = filteredData.filter(item => item.crop === cropValue);
+            }
+            
+            if (stateValue !== 'all') {
+                filteredData = filteredData.filter(item => item.state === stateValue);
+            }
+            
+            if (priceValue !== 'all') {
+                switch (priceValue) {
+                    case 'low':
+                        filteredData = filteredData.filter(item => item.maxPrice < 2000);
+                        break;
+                    case 'medium':
+                        filteredData = filteredData.filter(item => item.maxPrice >= 2000 && item.maxPrice <= 4000);
+                        break;
+                    case 'high':
+                        filteredData = filteredData.filter(item => item.maxPrice > 4000);
+                        break;
+                }
+            }
+            
+            renderTable(filteredData);
+        }
+
+        // Setup sorting functionality
+        function setupSorting() {
+            const headers = document.querySelectorAll('.sortable');
+            
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const sortBy = header.dataset.sort;
+                    const isAsc = header.classList.contains('sorted-asc');
+                    
+                    // Reset all headers
+                    headers.forEach(h => {
+                        h.classList.remove('sorted-asc', 'sorted-desc');
+                    });
+                    
+                    // Set new sort direction
+                    if (isAsc) {
+                        header.classList.add('sorted-desc');
+                        sortTable(sortBy, 'desc');
+                    } else {
+                        header.classList.add('sorted-asc');
+                        sortTable(sortBy, 'asc');
+                    }
+                });
+            });
+        }
+
+        // Sort table data
+        function sortTable(sortBy, direction) {
+            let sortedData = [...cropData];
+            
+            sortedData.sort((a, b) => {
+                let valueA, valueB;
+                
+                switch (sortBy) {
+                    case 'crop':
+                        valueA = a.crop;
+                        valueB = b.crop;
+                        break;
+                    case 'state':
+                        valueA = a.state;
+                        valueB = b.state;
+                        break;
+                    case 'price':
+                        valueA = (a.minPrice + a.maxPrice) / 2;
+                        valueB = (b.minPrice + b.maxPrice) / 2;
+                        break;
+                }
+                
+                if (valueA < valueB) return direction === 'asc' ? -1 : 1;
+                if (valueA > valueB) return direction === 'asc' ? 1 : -1;
+                return 0;
+            });
+            
+            renderTable(sortedData);
+        }
+    </script>
+</body>
+</html>

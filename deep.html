@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KrishiGyan - Smart Agriculture Knowledge Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="deep.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="WhatsApp Image 2025-03-28 at 02.00.12_87490936.jpg" alt="KrishiGyan Logo">
+                <h1>KrishiGyan</h1>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                    <li id="#feature"><a href="u.html"><i class="fas fa-seedling"></i> Crops</a></li>
+                    <li><a href="#weather"><i class="fas fa-cloud-sun"></i> Weather</a></li>
+                    <li><a href="#advisory"><i class="fas fa-robot"></i> AI Advisory</a></li>
+                    <li><a href="#schemes"><i class="fas fa-file-invoice-dollar"></i> Schemes</a></li>
+                    <li id="loginNav"><a href="login.html"><i class="fas fa-user"></i> Login</a></li>
+
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (user) {
+                document.querySelector("#mainNav ul").innerHTML += `<li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>`;
+                document.getElementById("logoutBtn").addEventListener("click", function () {
+                    localStorage.removeItem("user");
+                    window.location.href = "login.html";
+                });
+            }
+        });
+        </script>
+    <section class="hero">
+        <div class="container hero-content">
+            <h2>Empowering Farmers with Smart Agricultural Solutions</h2>
+            <p>Get personalized crop recommendations, real-time weather updates, and access to government schemes - all in one platform.</p>
+            <div class="hero-buttons">
+                <a href="#advisory" class="btn">Get Recommendations</a>
+                <a href="#" class="btn btn-outline">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Key Features</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Crop Information">
+                    </div>
+                    <div class="feature-content">
+                        <h3>Comprehensive Crop Database</h3>
+                        <p>Access detailed information about hundreds of crops including ideal growing conditions, pest control methods, and harvesting techniques.</p>
+                        <a href="#" class="feature-link">Explore Crops <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img" id="t4">
+                        <img src="3366845.jpg"alt="Weather Forecast">
+                    </div>
+                    <div class="feature-content">
+                        <h3>Precision Weather Forecasts</h3>
+                        <p>Get hyper-local weather predictions tailored for agricultural needs with alerts for extreme conditions.</p>
+                        <a href="#weather" class="feature-link">Check Weather <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://media.istockphoto.com/id/1452604857/photo/businessman-touching-the-brain-working-of-artificial-intelligence-automation-predictive.jpg?s=612x612&w=0&k=20&c=GkAOxzduJbUKpS2-LX_l6jSKtyhdKlnPMo2ito4xpR4= " alt="AI Advisory">
+                    </div>
+                    <div class="feature-content">
+                        <h3>AI-Powered Advisory</h3>
+                        <p>Receive personalized farming recommendations based on your location, soil type, and weather conditions.</p>
+                        <a href="#advisory" class="feature-link">Get Advice <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="stokes.jpg" alt="Market Prices">
+                    </div>
+                    <div class="feature-content">
+                        <h3>Live Market Prices</h3>
+                        <p>Stay updated with real-time market prices for crops across different regions to make informed selling decisions.</p>
+                        <a href="price.html" class="feature-link">View Prices <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section class="weather-section" id="weather">
+        <div class="container weather-container">
+            <div class="section-title">
+                <h2>Agricultural Weather Forecast</h2>
+            </div>
+            <div class="weather-widget">
+                <div class="weather-header">
+                    <h3>Current Weather</h3>
+                    <div class="location-input">
+                        <input type="text" id="locationInput" placeholder="Enter your location">
+                        <button id="searchWeather"><i class="fas fa-search"></i> Search</button>
+                    </div>
+                </div>
+                <div class="weather-main">
+                    <div>
+                        <div class="weather-temp">24°C</div>
+                        <div class="weather-desc">Partly Cloudy</div>
+                    </div>
+                    <div class="weather-icon">
+                        <i class="fas fa-cloud-sun"></i>
+                    </div>
+                </div>
+                <div class="weather-details">
+                    <div class="detail-item">
+                        
+                        <i class="fas fa-tint"></i>
+                        <span>Humidity: 65%</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-wind"></i>
+                        <span>Wind: 12 km/h</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-calendar-day"></i>
+                        <span>Rain Probability: 20%</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-sun"></i>
+                        <span>UV Index: 5 (Moderate)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section advisory-section" id="advisory">
+        <div class="container">
+            <div class="section-title">
+                <div class="ai">
+                    <a href="index.html">
+                        <img src="Chatbot Chat Message.jpg" alt="chatbot" >
+                    </a>
+                </div>
+                <h2>AI Crop Advisory</h2>
+            </div>
+            <div class="advisory-form">
+                <form id="cropAdvisoryForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="location">Your Location</label>
+                            <input type="text" id="location" placeholder="Enter your village/district" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cropType">Crop Type</label>
+                            <select id="cropType" required>
+                                <option value="">Select Crop</option>
+                                <option value="wheat">Wheat</option>
+                                <option value="rice">Rice</option>
+                                <option value="maize">Maize</option>
+                                <option value="sugarcane">Sugarcane</option>
+                                <option value="cotton">Cotton</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="soilType">Soil Type</label>
+                            <select id="soilType" required>
+                                <option value="">Select Soil Type</option>
+                                <option value="clay">Clay</option>
+                                <option value="sandy">Sandy</option>
+                                <option value="loamy">Loamy</option>
+                                <option value="black">Black (Regur)</option>
+                                <option value="red">Red</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="season">Current Season</label>
+                            <select id="season" required>
+                                <option value="">Select Season</option>
+                                <option value="kharif">Kharif (June-October)</option>
+                                <option value="rabi">Rabi (November-April)</option>
+                                <option value="zaid">Zaid (March-June)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="issues">Current Issues (if any)</label>
+                        <textarea id="issues" rows="3" placeholder="Describe any pest problems, diseases, or other issues"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Get Personalized Recommendations</button>
+                </form>
+                <div class="results-section" id="resultsSection">
+                    <h3>Your Personalized Recommendations</h3>
+                    <div class="recommendation-card">
+                        <h4>Optimal Planting Time</h4>
+                        <p>Based on your location and current weather patterns, the ideal planting window is between June 15-25.</p>
+                    </div>
+                    <div class="recommendation-card">
+                        <h4>Soil Preparation</h4>
+                        <p>For your loamy soil, we recommend adding 2kg of compost per square meter and tilling to 15cm depth.</p>
+                    </div>
+                    <div class="recommendation-card">
+                        <h4>Pest Management</h4>
+                        <p>Early signs of stem borer activity in your region. Apply neem oil spray every 10 days as preventive measure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section schemes-section" id="schemes">
+        <div class="container">
+            <div class="section-title">
+                <h2>Government Schemes</h2>
+            </div>
+            <div class="schemes-filter">
+                <div class="filter-group">
+                    <label for="stateFilter">State</label>
+                    <select id="stateFilter">
+                        <option value="">All States</option>
+                        <option value="maharashtra">Maharashtra</option>
+                        <option value="up">Uttar Pradesh</option>
+                        <option value="punjab">Punjab</option>
+                        <option value="karnataka">Karnataka</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="cropFilter">Crop Type</label>
+                    <select id="cropFilter">
+                        <option value="">All Crops</option>
+                        <option value="cereals">Cereals</option>
+                        <option value="pulses">Pulses</option>
+                        <option value="horticulture">Horticulture</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="schemeTypeFilter">Scheme Type</label>
+                    <select id="schemeTypeFilter">
+                        <option value="">All Types</option>
+                        <option value="subsidy">Subsidy</option>
+                        <option value="insurance">Insurance</option>
+                        <option value="loan">Loan</option>
+                    </select>
+                </div>
+            </div>
+            <div class="schemes-grid">
+                <div class="scheme-card">
+                    <div class="scheme-header">
+                        <h3>PM Kisan Samman Nidhi</h3>
+                    </div>
+                    <div class="scheme-body">
+                        <div class="scheme-detail">
+                            <label>Benefit:</label>
+                            <p>₹6,000 per year in three installments</p>
+                        </div>
+                        <div class="scheme-detail">
+                            <label>Eligibility:</label>
+                            <p>All small and marginal farmer families</p>
+                        </div>
+                        <div class="scheme-detail">
+                            <label>Deadline:</label>
+                            <p>Ongoing</p>
+                        </div>
+                        <a href="#" class="apply-btn">Apply Now</a>
+                    </div>
+                </div>
+                <div class="scheme-card">
+                    <div class="scheme-header">
+                        <h3>Soil Health Card Scheme</h3>
+                    </div>
+                    <div class="scheme-body">
+                        <div class="scheme-detail">
+                            <label>Benefit:</label>
+                            <p>Free soil testing every 2 years</p>
+                        </div>
+                        <div class="scheme-detail">
+                            <label>Eligibility:</label>
+                            <p>All farmers</p>
+                        </div>
+                        <div class="scheme-detail">
+                            <label>Deadline:</label>
+                            <p>Ongoing</p>
+                        </div>
+                        <a href="#" class="apply-btn">Apply Now</a>
+                    </div>
+                </div>
+                <div class="scheme-card">
+                    <div class="scheme-header">
+                        <h3>Pradhan Mantri Fasal Bima Yojana</h3>
+                    </div>
+                    <div class="scheme-body">
+                        <div class="scheme-detail">
+                            <label>Benefit:</label>
+                            <p>Crop insurance with premium as low as 2%</p>
+                        </div>
+                        <div class="scheme-detail">
+                            <label>Eligibility:</label>
+                            <p>All farmers growing notified crops</p>
+                        </div>
+                        <div class="scheme-detail">
+                            <label>Deadline:</label>
+                            <p>Varies by crop season</p>
+                        </div>
+                        <a href="#" class="apply-btn">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>KrishiGyan</h3>
+                    <p>Empowering Indian farmers with data-driven agricultural insights and smart farming solutions.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#features">Crop Database</a></li>
+                        <li><a href="#weather">Weather</a></li>
+                        <li><a href="#advisory">AI Advisory</a></li>
+                        <li><a href="#schemes">Schemes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Research Papers</a></li>
+                        <li><a href="#">Market Prices</a></li>
+                        <li><a href="#">Farmer Stories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +91 1800 123 4567</li>
+                        <li><i class="fas fa-envelope"></i> support@krishigyan.in</li>
+                        <li><i class="fas fa-map-marker-alt"></i> New Delhi, India</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 KrishiGyan. All Rights Reserved.</p>
+            </div>
+            
+        </div>
+    </footer>
+    
+
+    <script src="deep.js"></script>
+</body>
+</html>

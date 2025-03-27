@@ -1,0 +1,10 @@
+soil_type,climate,method,crop,growth_days,water_needs,ph_range,temp,rainfall,season,tip
+sandy,hot_dry,Drip irrigation,millet,60,low,6.0-7.0,30-40°C,low,summer,Use irrigation wisely. Opt for heat-tolerant crops.
+sandy,warm_rainy,Mulching,sorghum,90,medium,6.2-7.5,20-30°C,high,monsoon,Focus on water management.
+sandy,cool_dry,Sprinkler,barley,70,medium,6.0-7.0,10-20°C,low,winter,Plant wheat or barley. Protect against frost.
+clay,hot_dry,Furrow irrigation,cotton,150,high,5.5-7.5,30-40°C,low,summer,Use irrigation wisely. Opt for heat-tolerant crops.
+clay,warm_rainy,Raised beds,rice,120,very high,5.0-6.5,20-30°C,high,monsoon,Focus on water management.
+clay,cool_dry,Mulching,wheat,100,medium,6.0-7.0,10-20°C,low,winter,Plant wheat or barley. Protect against frost.
+loam,hot_dry,Drip irrigation,maize,100,high,5.8-7.0,30-40°C,low,summer,Use irrigation wisely. Opt for heat-tolerant crops.
+loam,warm_rainy,Sprinkler,beans,60,medium,6.0-7.0,20-30°C,high,monsoon,Focus on water management.
+loam,cool_dry,Mulching,oats,80,medium,5.5-7.0,10-20°C,low,winter,Plant wheat or barley. Protect against frost.

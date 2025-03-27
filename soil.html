@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soil & Climate Data Form</title>
+    <link rel="stylesheet" href="soil.css">
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Soil & Climate Data Form</h2>
+        <form action="#" method="POST">
+            <label for="soilType">Soil Type:</label>
+            <select id="soilType" name="soilType">
+                <option value="sandy">Sandy</option>
+                <option value="clay">Clay</option>
+                <option value="loamy">Loamy</option>
+                <option value="silt">Silt</option>
+                <option value="peat">Peat</option>
+                <option value="chalky">Chalky</option>
+            </select>
+
+            <label for="ph">Soil pH Level:</label>
+            <input type="number" id="ph" name="ph" placeholder="Enter pH value" step="0.1" min="0" max="14" required>
+
+            <label for="temp">Temperature Range (°C):</label>
+            <input type="text" id="temp" name="temp" placeholder="e.g., 20-30°C" required>
+
+            <label for="rainfall">Rainfall Level (mm):</label>
+            <input type="number" id="rainfall" name="rainfall" placeholder="Enter rainfall in mm" required>
+
+            <label for="climate">Climate Type:</label>
+            <select id="climate" name="climate">
+                <option value="tropical">Tropical</option>
+                <option value="arid">Arid</option>
+                <option value="temperate">Temperate</option>
+                <option value="continental">Continental</option>
+                <option value="polar">Polar</option>
+            </select>
+
+            <button type="submit">Submit Data</button>
+        </form>
+    </div>
+
+</body>
+</html>

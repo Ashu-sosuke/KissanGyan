@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Information Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-leaf me-2"></i>CropInfo
+            </a>
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#crops">Crops</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div> -->
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container text-center text-white">
+            <h1 class="display-4 fw-bold mb-3">Crop Information Portal</h1>
+            <p class="lead">Your complete guide to agricultural crops</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container my-5" id="crops">
+        <h2 class="text-center mb-5 fw-bold text-success">Explore Crops</h2>
+        <div class="row g-4">
+            <!-- Sugarcane -->
+            <div class="col-md-4 col-sm-6">
+                <div class="crop-card img-fluid" onclick="showCropDetails('sugarcane')">
+                    <div class="crop-img-container">
+                        <img src="sugarcane.jpg" class="crop-img" alt="Sugarcane">
+                        <div class="crop-overlay"></div>
+                    </div>
+                    <div class="crop-card-body">
+                        <h3>Sugarcane</h3>
+                        <p>A tall perennial grass used for sugar production</p>
+                        <button class="btn btn-outline-success">View Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Wheat -->
+            <div class="col-md-4 col-sm-6">
+                <div class="crop-card" onclick="showCropDetails('wheat')">
+                    <div class="crop-img-container">
+                        <img src="wheat.jpg" class="crop-img" alt="Wheat">
+                        <div class="crop-overlay"></div>
+                    </div>
+                    <div class="crop-card-body">
+                        <h3>Wheat</h3>
+                        <p>A cereal grain that is a worldwide staple food</p>
+                        <button class="btn btn-outline-success">View Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Maize -->
+            <div class="col-md-4 col-sm-6">
+                <div class="crop-card" onclick="showCropDetails('maize')">
+                    <div class="crop-img-container">
+                        <img src="maizes.jpg" class="crop-img" alt="Maize">
+                        <div class="crop-overlay"></div>
+                    </div>
+                    <div class="crop-card-body">
+                        <h3>Maize</h3>
+                        <p>Also known as corn, a cereal grain</p>
+                        <button class="btn btn-outline-success">View Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Rice -->
+            <div class="col-md-4 col-sm-6">
+                <div class="crop-card" onclick="showCropDetails('rice')">
+                    <div class="crop-img-container">
+                        <img src="rice.jpg" class="crop-img" alt="Rice">
+                        <div class="crop-overlay"></div>
+                    </div>
+                    <div class="crop-card-body">
+                        <h3>Rice</h3>
+                        <p>The seed of the grass species Oryza sativa</p>
+                        <button class="btn btn-outline-success">View Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cotton -->
+            <div class="col-md-4 col-sm-6">
+                <div class="crop-card" onclick="showCropDetails('cotton')">
+                    <div class="crop-img-container">
+                        <img src="cotton.jpg" class="crop-img" alt="Cotton">
+                        <div class="crop-overlay"></div>
+                    </div>
+                    <div class="crop-card-body">
+                        <h3>Cotton</h3>
+                        <p>A soft, fluffy staple fiber</p>
+                        <button class="btn btn-outline-success">View Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cereal -->
+            <div class="col-md-4 col-sm-6">
+                <div class="crop-card" onclick="showCropDetails('cereal')">
+                    <div class="crop-img-container">
+                        <img src="ceriea.jpg" class="crop-img" alt="Cereal">
+                        <div class="crop-overlay"></div>
+                    </div>
+                    <div class="crop-card-body">
+                        <h3>Cereal</h3>
+                        <p>Grasses cultivated for edible components</p>
+                        <button class="btn btn-outline-success">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- About Section -->
+    <section class="bg-light py-5" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="farm.jpg" class="img-fluid rounded shadow" alt="Farm">
+                </div> -->
+                <div class="col-lg-6">
+                    <h2 class="fw-bold mb-4 text-success">About Our Portal</h2>
+                    <p class="lead">Empowering farmers with comprehensive crop information</p>
+                    <p>Our Crop Information Portal provides detailed guides on various crops, including their growing requirements, soil compatibility, ideal weather conditions, and pest control measures.</p>
+                    <div class="d-flex mt-4">
+                        <div class="me-4 text-center">
+                            <h3 class="fw-bold text-success">6+</h3>
+                            <p>Crop Categories</p>
+                        </div>
+                        <div class="me-4 text-center">
+                            <h3 class="fw-bold text-success">50+</h3>
+                            <p>Varieties</p>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="fw-bold text-success">24/7</h3>
+                            <p>Access</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crop Details Modal -->
+    <div class="modal fade" id="cropModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">Crop Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <img id="cropImage" src="" alt="" class="img-fluid rounded mb-3">
+                            <h3 id="cropName" class="fw-bold text-success"></h3>
+                            <p id="cropDescription" class="text-muted"></p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-header bg-success text-white">
+                                    <h5 class="mb-0">Growing Requirements</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">
+                                            <strong>Temperature:</strong> 
+                                            <span id="temperature"></span>°C
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Rainfall:</strong> 
+                                            <span id="rainfall"></span> mm
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>pH Range:</strong> 
+                                            <span id="ph"></span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <strong>Soil Types:</strong> 
+                                            <span id="soilTypes"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Soil Compatibility</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="fw-bold">Soil Requirements</h6>
+                                    <ul id="soilRequirements" class="list-group list-group-flush"></ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="fw-bold">Soil Preparation</h6>
+                                    <p id="soilPreparation" class="text-muted"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Weather Conditions</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h6 class="fw-bold">Temperature Range</h6>
+                                    <p id="tempRange" class="text-muted"></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="fw-bold">Humidity</h6>
+                                    <p id="humidity" class="text-muted"></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="fw-bold">Growing Season</h6>
+                                    <p id="growingSeason" class="text-muted"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Pest Control</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="fw-bold">Common Pests</h6>
+                                    <ul id="commonPests" class="list-group list-group-flush"></ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="fw-bold">Control Measures</h6>
+                                    <ul id="controlMeasures" class="list-group list-group-flush"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-0">© 2023 Crop Information Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDc0BUeALmpsHyhA28ZvMrccMUIDhsd0cs",
+            authDomain: "kisan-89ab2.firebaseapp.com",
+            projectId: "kisan-89ab2",
+            storageBucket: "kisan-89ab2.firebasestorage.app",
+            messagingSenderId: "946744645154",
+            appId: "1:946744645154:web:db65576d908d5370c21c7b",
+            measurementId: "G-1HD0X1TD7M"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.showCropDetails = async function(cropName) {
+            try {
+                const cropDoc = await getDoc(doc(db, "crops", cropName.toLowerCase()));
+                if (cropDoc.exists()) {
+                    const cropData = cropDoc.data();
+                    
+                    document.getElementById('cropName').textContent = cropData.name;
+                    document.getElementById('cropDescription').textContent = cropData.description;
+                    document.getElementById('temperature').textContent = `${cropData.temperature.min} - ${cropData.temperature.max}`;
+                    document.getElementById('rainfall').textContent = `${cropData.rainfall.min} - ${cropData.rainfall.max}`;
+                    document.getElementById('ph').textContent = `${cropData.ph.min} - ${cropData.ph.max}`;
+                    document.getElementById('soilTypes').textContent = cropData.soilTypes.join(', ');
+                    document.getElementById('cropImage').src = `${cropName.toLowerCase()}.jpg`;
+
+                    if (cropData.soilRequirements) {
+                        const soilList = document.getElementById('soilRequirements');
+                        soilList.innerHTML = cropData.soilRequirements.map(req => 
+                            `<li class="list-group-item">${req}</li>`
+                        ).join('');
+                    }
+                    document.getElementById('soilPreparation').textContent = cropData.soilPreparation || 'Not specified';
+
+                    document.getElementById('tempRange').textContent = `${cropData.temperature.min}°C - ${cropData.temperature.max}°C`;
+                    document.getElementById('humidity').textContent = cropData.humidity || 'Not specified';
+                    document.getElementById('growingSeason').textContent = cropData.growingSeason || 'Not specified';
+
+                    if (cropData.commonPests) {
+                        const pestsList = document.getElementById('commonPests');
+                        pestsList.innerHTML = cropData.commonPests.map(pest => 
+                            `<li class="list-group-item">${pest}</li>`
+                        ).join('');
+                    }
+                    if (cropData.controlMeasures) {
+                        const measuresList = document.getElementById('controlMeasures');
+                        measuresList.innerHTML = cropData.controlMeasures.map(measure => 
+                            `<li class="list-group-item">${measure}</li>`
+                        ).join('');
+                    }
+                    
+                    const modal = new bootstrap.Modal(document.getElementById('cropModal'));
+                    modal.show();
+                } else {
+                    alert('Crop details not found!');
+                }
+            } catch (error) {
+                console.error("Error fetching crop details:", error);
+                alert('Error loading crop details. Please try again.');
+            }
+        };
+    </script>
+</body>
+</html>
